@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Pookies</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Futura&display=swap');
-
     body {
       background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
       font-family: 'Futura', sans-serif;
@@ -32,11 +30,12 @@
       text-transform: lowercase;
       transition: transform 0.2s ease, text-shadow 0.2s ease;
       user-select: none;
-      text-shadow: 0 0 15px #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px #a29ff1;
     }
 
     .enter-screen:hover {
       transform: scale(1.05);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px #a29ff1;
     }
 
     .enter-screen:active {
@@ -55,7 +54,11 @@
       text-transform: uppercase;
       letter-spacing: 3px;
       color: #ffffff;
-      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #a29ff1,
+        0 0 40px #a29ff1;
     }
 
     .friend-cards {
@@ -103,16 +106,22 @@
       user-select: none;
     }
 
+    .song-title,
+    .volume-btn,
+    .time {
+      text-shadow: 0 0 8px #fff, 0 0 16px #a29ff1;
+    }
+
     .song-title {
       margin-bottom: 10px;
       text-transform: lowercase;
       font-weight: 600;
-      text-shadow: 0 0 10px #ffffff;
     }
 
     .volume-btn {
       cursor: pointer;
       margin-top: 10px;
+      transition: transform 0.2s ease;
       font-family: 'Futura', sans-serif;
       font-size: 1.1rem;
       color: white;
@@ -121,8 +130,6 @@
       border: none;
       outline: none;
       user-select: none;
-      text-shadow: 0 0 10px #ffffff;
-      transition: transform 0.2s ease;
     }
 
     .volume-btn:hover {
@@ -142,15 +149,15 @@
     .progress {
       width: 100%;
       cursor: pointer;
-      accent-color: #fff;
-      filter: drop-shadow(0 0 6px #ffffff);
+      accent-color: #a29ff1;
+      filter: drop-shadow(0 0 5px #a29ff1);
     }
 
     .time {
       margin-top: 4px;
       font-size: 0.9em;
       font-family: 'Futura', sans-serif;
-      text-shadow: 0 0 10px #ffffff;
+      user-select: none;
     }
 
     @media (max-width: 768px) {
@@ -170,21 +177,30 @@
   </style>
 </head>
 <body>
+
   <div class="enter-screen" onclick="startMusic()">click to enter</div>
 
   <div class="container" id="main-content" style="display:none;">
-    <h1>my pookies!!</h1>
-
+    <h1>MY POOKIES!!</h1>
     <div class="friend-cards">
-      <!-- Friend cards here -->
+      <div class="friend-card"><div class="friend-header"><h2>bxt</h2></div><div class="friend-body"><p>bxt pookie!!</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>astral</h2></div><div class="friend-body"><p>astral from aa services gooner</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>laxlep</h2></div><div class="friend-body"><p>laxlep goon on vc on time</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>jjfire</h2></div><div class="friend-body"><p>jjfire is jjfire and no one can change that</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>heeps</h2></div><div class="friend-body"><p>british</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>neva</h2></div><div class="friend-body"><p>pookie neva!!</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>table</h2></div><div class="friend-body"><p>brother</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>z4eu</h2></div><div class="friend-body"><p>z4eu is very cute and adorable and kissable</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>raze</h2></div><div class="friend-body"><p>raze og raze</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>prroxzy</h2></div><div class="friend-body"><p>if you saw this guy you would wanna kiss him aggressively</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>kingguernesy</h2></div><div class="friend-body"><p>dude start making project krabs updates again PLEASE</p></div></div>
     </div>
 
     <div class="player">
       <div class="song-title" id="song-title">loading...</div>
       <button class="volume-btn" id="volume-btn">mute</button>
-
       <div class="progress-container">
-        <input type="range" id="progress" class="progress" value="0" min="0" step="0.1" />
+        <input type="range" id="progress" class="progress" value="0" min="0" step="1" />
         <div class="time" id="time">0:00 -0:00</div>
       </div>
     </div>
@@ -224,6 +240,7 @@
       audio.load();
       songTitle.textContent = songs[index].name;
       progress.value = 0;
+      timeDisplay.textContent = `0:00 -0:00`;
     }
 
     function playRandomSong() {
@@ -237,8 +254,8 @@
 
     function updateProgress() {
       if (!audio.duration) return;
-      progress.max = audio.duration;
-      progress.value = audio.currentTime;
+      progress.max = Math.floor(audio.duration);
+      progress.value = Math.floor(audio.currentTime);
       timeDisplay.textContent = `${formatTime(audio.currentTime)} -${formatTime(audio.duration - audio.currentTime)}`;
     }
 
@@ -257,14 +274,22 @@
     });
 
     volumeBtn.addEventListener("click", () => {
-      isMuted = !isMuted;
-      audio.muted = isMuted;
+      audio.muted = !audio.muted;
+      isMuted = audio.muted;
       volumeBtn.textContent = isMuted ? "unmute" : "mute";
     });
 
-    audio.addEventListener("ended", playRandomSong);
-    audio.addEventListener("play", startProgressUpdater);
-    audio.addEventListener("pause", stopProgressUpdater);
+    audio.addEventListener("ended", () => {
+      playRandomSong();
+    });
+
+    audio.addEventListener("play", () => {
+      startProgressUpdater();
+    });
+
+    audio.addEventListener("pause", () => {
+      stopProgressUpdater();
+    });
 
     function startMusic() {
       enterScreen.style.display = "none";
