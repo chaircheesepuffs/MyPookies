@@ -14,6 +14,21 @@
       text-align: center;
       overflow-x: hidden;
     }
+    .glow-blue {
+      color: #6c63ff;
+      text-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff,
+        0 0 15px #6c63ff,
+        0 0 20px #6c63ff;
+    }
+    .glow-blue-hover:hover {
+      text-shadow:
+        0 0 10px #8f7fff,
+        0 0 20px #8f7fff,
+        0 0 30px #8f7fff,
+        0 0 40px #8f7fff;
+    }
     .enter-screen {
       position: fixed;
       inset: 0;
@@ -25,15 +40,18 @@
       cursor: pointer;
       font-size: 3rem;
       font-family: 'Futura', sans-serif;
-      color: white;
+      color: #6c63ff;
       text-transform: lowercase;
-      transition: transform 0.2s ease, text-shadow 0.2s ease;
       user-select: none;
-      text-shadow: 0 0 12px #a29ff1;
+      transition: transform 0.2s ease;
     }
     .enter-screen:hover {
       transform: scale(1.05);
-      text-shadow: 0 0 20px #a29ff1;
+      text-shadow:
+        0 0 10px #8f7fff,
+        0 0 20px #8f7fff,
+        0 0 30px #8f7fff,
+        0 0 40px #8f7fff;
     }
     .enter-screen:active {
       transform: scale(0.95);
@@ -48,17 +66,13 @@
       font-size: 2.8em;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: #ffffff;
-      text-shadow: 0 0 10px #a29ff1;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 5px #a29ff1, 0 0 10px #a29ff1, 0 0 20px #a29ff1;
-      }
-      to {
-        text-shadow: 0 0 10px #6c63ff, 0 0 25px #6c63ff, 0 0 30px #6c63ff;
-      }
+      color: #6c63ff;
+      user-select: none;
+      text-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff,
+        0 0 15px #6c63ff,
+        0 0 20px #6c63ff;
     }
     .friend-cards {
       display: grid;
@@ -76,18 +90,22 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: white;
-      text-shadow: 0 0 5px #a29ff1;
+      color: #6c63ff;
+      text-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff;
     }
     .friend-header h2 {
       margin: 0;
       font-size: 1.5em;
-      text-shadow: 0 0 8px #a29ff1;
+      color: #6c63ff;
+      text-shadow: 0 0 5px #6c63ff;
+      user-select: none;
     }
     .friend-body p {
       font-size: 1.1em;
-      color: #ffffff;
-      text-shadow: 0 0 5px #a29ff1;
+      color: #6c63ff;
+      user-select: none;
     }
     .friend-card:hover {
       transform: translateY(-5px);
@@ -100,15 +118,17 @@
       align-items: center;
       font-size: 1.2rem;
       user-select: none;
-      color: white;
-      text-shadow: 0 0 8px #a29ff1;
+      color: #6c63ff;
+      text-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff,
+        0 0 15px #6c63ff;
     }
     .song-title {
       margin-bottom: 10px;
-      text-transform: lowercase;
       font-weight: 600;
-      text-shadow: 0 0 15px #6c63ff;
-      color: #6c63ff;
+      text-transform: lowercase;
+      user-select: none;
     }
     .volume-btn {
       cursor: pointer;
@@ -122,11 +142,17 @@
       border: none;
       outline: none;
       user-select: none;
-      text-shadow: 0 0 10px #6c63ff;
+      text-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff,
+        0 0 15px #6c63ff;
     }
     .volume-btn:hover {
       transform: scale(1.1);
-      text-shadow: 0 0 15px #8f7fff;
+      text-shadow:
+        0 0 10px #8f7fff,
+        0 0 20px #8f7fff,
+        0 0 30px #8f7fff;
     }
     .volume-btn:active {
       transform: scale(0.95);
@@ -136,22 +162,19 @@
       max-width: 600px;
       margin-top: 10px;
     }
-    .progress {
+    #progress {
       width: 100%;
       -webkit-appearance: none;
-      appearance: none;
       height: 8px;
       border-radius: 5px;
       background: #a29ff1;
-      outline: none;
       cursor: pointer;
-      box-shadow: 0 0 15px #a29ff1;
-      transition: box-shadow 0.3s ease;
+      box-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff;
+      transition: background 0.3s ease;
     }
-    .progress:hover {
-      box-shadow: 0 0 25px #8f7fff;
-    }
-    .progress::-webkit-slider-thumb {
+    #progress::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 20px;
@@ -159,23 +182,22 @@
       border-radius: 50%;
       background: #6c63ff;
       cursor: pointer;
-      box-shadow: 0 0 15px #6c63ff;
-      transition: box-shadow 0.3s ease;
+      box-shadow:
+        0 0 10px #6c63ff,
+        0 0 20px #6c63ff;
+      transition: background 0.3s ease;
+      margin-top: -6px;
     }
-    .progress::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 25px #8f7fff;
-    }
-    .progress::-moz-range-thumb {
+    #progress::-moz-range-thumb {
       width: 20px;
       height: 20px;
       border-radius: 50%;
       background: #6c63ff;
       cursor: pointer;
-      box-shadow: 0 0 15px #6c63ff;
-      transition: box-shadow 0.3s ease;
-    }
-    .progress::-moz-range-thumb:hover {
-      box-shadow: 0 0 25px #8f7fff;
+      box-shadow:
+        0 0 10px #6c63ff,
+        0 0 20px #6c63ff;
+      transition: background 0.3s ease;
     }
     .time {
       margin-top: 4px;
@@ -183,11 +205,9 @@
       font-family: 'Futura', sans-serif;
       user-select: none;
       color: #6c63ff;
-      text-shadow: 0 0 10px #6c63ff;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      font-weight: 600;
+      text-shadow:
+        0 0 5px #6c63ff,
+        0 0 10px #6c63ff;
     }
     @media (max-width: 768px) {
       h1 {
@@ -206,10 +226,10 @@
 </head>
 <body>
 
-  <div class="enter-screen" onclick="startMusic()">click to enter</div>
+  <div class="enter-screen glow-blue-glow" onclick="startMusic()">click to enter</div>
 
   <div class="container" id="main-content" style="display:none;">
-    <h1>my pookies!!</h1>
+    <h1>MY POOKIES!!</h1>
     <div class="friend-cards">
       <div class="friend-card">
         <div class="friend-header"><h2>bxt</h2></div>
@@ -262,15 +282,14 @@
       <button class="volume-btn" id="volume-btn">mute</button>
 
       <div class="progress-container">
-        <input type="range" id="progress" class="progress" value="0" min="0" step="0.1" />
-        <div class="time" id="time"><span id="current-time">0:00</span> - <span id="duration">0:00</span></div>
+        <input type="range" id="progress" value="0" min="0" step="1" />
+        <div class="time" id="time">0:00 - 0:00</div>
       </div>
     </div>
   </div>
 
   <script>
     const songs = [
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/bipolar.mp3", name: "bipolar" },
       { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3", name: "ok im cool" },
       { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3", name: "stephanie" },
       { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3", name: "nope your too late i already died" },
@@ -283,14 +302,13 @@
     const volumeBtn = document.getElementById("volume-btn");
     const songTitle = document.getElementById("song-title");
     const progress = document.getElementById("progress");
-    const timeDisplayCurrent = document.getElementById("current-time");
-    const timeDisplayDuration = document.getElementById("duration");
+    const timeDisplay = document.getElementById("time");
     const enterScreen = document.querySelector(".enter-screen");
     const mainContent = document.getElementById("main-content");
 
     let isMuted = false;
     let currentSongIndex = -1;
-    let animationFrameId;
+    let isDragging = false;
 
     function formatTime(seconds) {
       const mins = Math.floor(seconds / 60);
@@ -304,8 +322,7 @@
       audio.load();
       songTitle.textContent = songs[index].name;
       progress.value = 0;
-      timeDisplayCurrent.textContent = "0:00";
-      timeDisplayDuration.textContent = "0:00";
+      timeDisplay.textContent = `0:00 - 0:00`;
     }
 
     function playRandomSong() {
@@ -319,16 +336,21 @@
 
     function updateProgress() {
       if (!audio.duration) return;
-      progress.max = audio.duration;
-      progress.value = audio.currentTime;
-      timeDisplayCurrent.textContent = formatTime(audio.currentTime);
-      timeDisplayDuration.textContent = formatTime(audio.duration);
-      animationFrameId = requestAnimationFrame(updateProgress);
+      if (!isDragging) {
+        progress.max = Math.floor(audio.duration);
+        progress.value = Math.floor(audio.currentTime);
+      }
+      timeDisplay.textContent = `${formatTime(audio.currentTime)} - ${formatTime(audio.duration)}`;
     }
 
     progress.addEventListener("input", () => {
+      isDragging = true;
+      timeDisplay.textContent = `${formatTime(progress.value)} - ${formatTime(audio.duration)}`;
+    });
+
+    progress.addEventListener("change", () => {
       audio.currentTime = progress.value;
-      timeDisplayCurrent.textContent = formatTime(progress.value);
+      isDragging = false;
     });
 
     volumeBtn.addEventListener("click", () => {
@@ -347,12 +369,8 @@
       playRandomSong();
     });
 
-    audio.addEventListener("play", () => {
-      animationFrameId = requestAnimationFrame(updateProgress);
-    });
-
-    audio.addEventListener("pause", () => {
-      cancelAnimationFrame(animationFrameId);
+    audio.addEventListener("timeupdate", () => {
+      updateProgress();
     });
 
     function startMusic() {
