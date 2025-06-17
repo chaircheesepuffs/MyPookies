@@ -204,7 +204,7 @@
                 <source id="music-source" src="" type="audio/mpeg" />
                 Your browser does not support the audio element.
             </audio>
-            <button id="mute-button" onclick="toggleMute()">🔇 Mute</button>
+            <button id="mute-button" onclick="toggleMute()">🔇 mute</button>
         </div>
     </div>
 
@@ -228,11 +228,11 @@
 
         function toggleMute() {
             audio.muted = !audio.muted;
-            document.getElementById("mute-button").textContent = audio.muted ? "🔊 Unmute" : "🔇 Mute";
+            document.getElementById("mute-button").textContent = audio.muted ? "🔊 unmute" : "🔇 mute";
         }
 
         window.onload = () => {
-            document.getElementById("mute-button").textContent = audio.muted ? "🔊 Unmute" : "🔇 Mute";
+            document.getElementById("mute-button").textContent = audio.muted ? "🔊 unmute" : "🔇 mute";
         };
     </script>
 </body>
