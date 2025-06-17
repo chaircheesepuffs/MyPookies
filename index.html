@@ -18,7 +18,7 @@
     .enter-screen {
       position: fixed;
       inset: 0;
-      background: #000000dd;
+      background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -135,11 +135,55 @@
       width: 80%;
       max-width: 600px;
       margin-top: 10px;
+      position: relative;
     }
 
     .progress {
       width: 100%;
+      appearance: none;
+      height: 10px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.3);
+      outline: none;
+      overflow: hidden;
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .progress::-webkit-slider-thumb {
+      appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      margin-top: -4px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      transition: transform 0.2s ease;
+    }
+
+    .progress::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .progress::-moz-range-thumb {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      transition: transform 0.2s ease;
+    }
+
+    .progress::-moz-range-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .progress::-moz-range-track {
+      background: rgba(255, 255, 255, 0.3);
+      height: 10px;
+      border-radius: 50px;
     }
 
     .time {
@@ -172,56 +216,22 @@
   <div class="container" id="main-content" style="display:none;">
     <h1>my pookies!!</h1>
     <div class="friend-cards">
-      <div class="friend-card">
-        <div class="friend-header"><h2>bxt</h2></div>
-        <div class="friend-body"><p>bxt pookie!!</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>astral</h2></div>
-        <div class="friend-body"><p>astral from aa services gooner</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>laxlep</h2></div>
-        <div class="friend-body"><p>laxlep goon on vc on time</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>jjfire</h2></div>
-        <div class="friend-body"><p>jjfire is jjfire and no one can change that</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>heeps</h2></div>
-        <div class="friend-body"><p>british</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>neva</h2></div>
-        <div class="friend-body"><p>pookie neva!!</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>table</h2></div>
-        <div class="friend-body"><p>brother</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>z4eu</h2></div>
-        <div class="friend-body"><p>z4eu is very cute and adorable and kissable</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>raze</h2></div>
-        <div class="friend-body"><p>raze og raze</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>prroxzy</h2></div>
-        <div class="friend-body"><p>if you saw this guy you would wanna kiss him aggresively</p></div>
-      </div>
-      <div class="friend-card">
-        <div class="friend-header"><h2>kingguernesy</h2></div>
-        <div class="friend-body"><p>dude start making project krabs updates again PLEASE</p></div>
-      </div>
+      <div class="friend-card"><div class="friend-header"><h2>bxt</h2></div><div class="friend-body"><p>bxt pookie!!</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>astral</h2></div><div class="friend-body"><p>astral from aa services gooner</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>laxlep</h2></div><div class="friend-body"><p>laxlep goon on vc on time</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>jjfire</h2></div><div class="friend-body"><p>jjfire is jjfire and no one can change that</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>heeps</h2></div><div class="friend-body"><p>british</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>neva</h2></div><div class="friend-body"><p>pookie neva!!</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>table</h2></div><div class="friend-body"><p>brother</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>z4eu</h2></div><div class="friend-body"><p>z4eu is very cute and adorable and kissable</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>raze</h2></div><div class="friend-body"><p>raze og raze</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>prroxzy</h2></div><div class="friend-body"><p>if you saw this guy you would wanna kiss him aggresively</p></div></div>
+      <div class="friend-card"><div class="friend-header"><h2>kingguernesy</h2></div><div class="friend-body"><p>dude start making project krabs updates again PLEASE</p></div></div>
     </div>
 
     <div class="player">
       <div class="song-title" id="song-title">Loading...</div>
       <button class="volume-btn" id="volume-btn">mute</button>
-
       <div class="progress-container">
         <input type="range" id="progress" class="progress" value="0" min="0" step="1" />
         <div class="time" id="time">0:00 / 0:00</div>
@@ -237,94 +247,59 @@
       { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3", name: "party" }
     ];
 
-    const audio = new Audio();
-    audio.volume = 0.7;
+    let audio = new Audio();
+    let currentSongIndex = Math.floor(Math.random() * songs.length);
+    let isMuted = false;
 
-    const volumeBtn = document.getElementById("volume-btn");
     const songTitle = document.getElementById("song-title");
+    const volumeBtn = document.getElementById("volume-btn");
     const progress = document.getElementById("progress");
     const timeDisplay = document.getElementById("time");
-    const enterScreen = document.querySelector(".enter-screen");
-    const mainContent = document.getElementById("main-content");
 
-    let isMuted = false;
-    let currentSongIndex = -1;
-    let progressUpdateInterval;
+    function startMusic() {
+      document.querySelector(".enter-screen").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+      loadSong(currentSongIndex);
+      audio.play();
+      setInterval(updateProgress, 500);
+    }
+
+    function loadSong(index) {
+      const song = songs[index];
+      audio.src = song.url;
+      songTitle.textContent = song.name;
+    }
+
+    audio.addEventListener("ended", () => {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+      audio.play();
+    });
+
+    volumeBtn.addEventListener("click", () => {
+      isMuted = !isMuted;
+      audio.muted = isMuted;
+      volumeBtn.textContent = isMuted ? "unmute" : "mute";
+    });
+
+    progress.addEventListener("input", () => {
+      audio.currentTime = progress.value;
+    });
+
+    function updateProgress() {
+      if (!isNaN(audio.duration)) {
+        progress.max = Math.floor(audio.duration);
+        progress.value = Math.floor(audio.currentTime);
+        timeDisplay.textContent = formatTime(audio.currentTime) + " / " + formatTime(audio.duration);
+      }
+    }
 
     function formatTime(seconds) {
       const mins = Math.floor(seconds / 60);
       const secs = Math.floor(seconds % 60);
-      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    }
-
-    function loadSong(index) {
-      currentSongIndex = index;
-      audio.src = songs[index].url;
-      audio.load();
-      songTitle.textContent = songs[index].name;
-      progress.value = 0;
-      timeDisplay.textContent = `0:00 / 0:00`;
-    }
-
-    function playRandomSong() {
-      let nextIndex;
-      do {
-        nextIndex = Math.floor(Math.random() * songs.length);
-      } while (nextIndex === currentSongIndex);
-      loadSong(nextIndex);
-      audio.play();
-    }
-
-    function updateProgress() {
-      if (!audio.duration) return;
-      progress.max = Math.floor(audio.duration);
-      progress.value = Math.floor(audio.currentTime);
-      timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-    }
-
-    function startProgressUpdater() {
-      if (progressUpdateInterval) clearInterval(progressUpdateInterval);
-      progressUpdateInterval = setInterval(updateProgress, 500);
-    }
-
-    function stopProgressUpdater() {
-      if (progressUpdateInterval) clearInterval(progressUpdateInterval);
-    }
-
-    progress.addEventListener("input", () => {
-      audio.currentTime = progress.value;
-      updateProgress();
-    });
-
-    volumeBtn.addEventListener("click", () => {
-      if (isMuted) {
-        audio.muted = false;
-        isMuted = false;
-        volumeBtn.textContent = "mute";
-      } else {
-        audio.muted = true;
-        isMuted = true;
-        volumeBtn.textContent = "unmute";
-      }
-    });
-
-    audio.addEventListener("ended", () => {
-      playRandomSong();
-    });
-
-    audio.addEventListener("play", () => {
-      startProgressUpdater();
-    });
-
-    audio.addEventListener("pause", () => {
-      stopProgressUpdater();
-    });
-
-    function startMusic() {
-      enterScreen.style.display = "none";
-      mainContent.style.display = "block";
-      playRandomSong();
+      return mins + ":" + (secs < 10 ? "0" + secs : secs);
     }
   </script>
+
 </body>
 </html>
