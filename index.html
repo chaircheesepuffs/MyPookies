@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Pookies</title>
     <style>
         body {
-            background: linear-gradient(135deg, #ffffff, #a29ff1,#a29ff1, #ffffff );
+            background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
             font-family: 'Futura', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             color: #ffffff;
@@ -22,6 +22,7 @@
             width: 100%;
             max-width: 900px;
             padding: 20px;
+            flex-grow: 1;
         }
 
         h1 {
@@ -30,12 +31,13 @@
             letter-spacing: 3px;
             color: #ffffff;
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.2em;
         }
 
         .friend-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
             justify-items: center;
             margin-top: 30px;
         }
@@ -68,6 +70,27 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
+        #audio-controls {
+            margin: 20px 0;
+        }
+
+        #mute-button {
+            margin-left: 10px;
+            font-size: 1.1em;
+            padding: 6px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background: #6c63ff;
+            color: white;
+            box-shadow: 0 4px 10px rgba(108, 99, 255, 0.5);
+            transition: background 0.3s ease;
+        }
+
+        #mute-button:hover {
+            background: #574fd6;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.2em;
@@ -90,7 +113,7 @@
                     <h2>bxt</h2>
                 </div>
                 <div class="friend-body">
-                    <p>this man is like a brother to me, he helped whenever i needed it, and hes like raze</p>
+                    <p>bxt pookie!!</p>
                 </div>
             </div>
 
@@ -99,7 +122,7 @@
                     <h2>astral</h2>
                 </div>
                 <div class="friend-body">
-                    <p>astral is a great friend bro idk</p>
+                    <p>astral from aa services gooner</p>
                 </div>
             </div>
 
@@ -108,7 +131,7 @@
                     <h2>laxlep</h2>
                 </div>
                 <div class="friend-body">
-                    <p>this fella is the type of guy that has to answer the call when i call bro, this guy played basketball on vc lol</p>
+                    <p>laxlep goon on vc on time</p>
                 </div>
             </div>
 
@@ -117,7 +140,7 @@
                     <h2>jjfire</h2>
                 </div>
                 <div class="friend-body">
-                    <p>Jjfire is jjfire and no one can change that</p>
+                    <p>jjfire is jjfire and no one can change that</p>
                 </div>
             </div>
 
@@ -126,7 +149,7 @@
                     <h2>heeps</h2>
                 </div>
                 <div class="friend-body">
-                    <p>british pookie, ate british walkers chips in vc once</p>
+                    <p>british</p>
                 </div>
             </div>
 
@@ -135,7 +158,7 @@
                     <h2>neva</h2>
                 </div>
                 <div class="friend-body">
-                    <p>this guy is chill asf istg</p>
+                    <p>pookie neva!!</p>
                 </div>
             </div>
 
@@ -144,7 +167,7 @@
                     <h2>table</h2>
                 </div>
                 <div class="friend-body">
-                    <p>this is my brother and he chill</p>
+                    <p>brother</p>
                 </div>
             </div>
 
@@ -162,28 +185,54 @@
                     <h2>raze</h2>
                 </div>
                 <div class="friend-body">
-                    <p>yk the type of guy that you meet when u start in this community and just stick with them? here he is idk what i would do without him</p>
+                    <p>raze og raze</p>
                 </div>
             </div>
 
-                        <div class="friend-card">
+            <div class="friend-card">
                 <div class="friend-header">
-                    <h2>gl¿tch</h2>
+                    <h2>prroxzy</h2>
                 </div>
                 <div class="friend-body">
-                    <p>trust me when i tell yall this, if you saw this guy you would wanna kiss him aggresively</p>
+                    <p>if you saw this guy you would wanna kiss him aggressively</p>
                 </div>
             </div>
+        </div>
 
+        <div id="audio-controls">
+            <audio id="bg-music" controls autoplay loop>
+                <source id="music-source" src="" type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+            <button id="mute-button" onclick="toggleMute()">🔇 Mute</button>
+        </div>
     </div>
+
     <script>
+        const songs = [
+            "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3",
+            "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3",
+            "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3",
+            "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3"
+        ];
+
+        // Choose random song on page load
+        const randomSong = songs[Math.floor(Math.random() * songs.length)];
+
+        const audio = document.getElementById("bg-music");
+        const source = document.getElementById("music-source");
+
+        source.src = randomSong;
+        audio.load();
+        audio.play();
+
+        function toggleMute() {
+            audio.muted = !audio.muted;
+            document.getElementById("mute-button").textContent = audio.muted ? "🔊 Unmute" : "🔇 Mute";
+        }
+
         window.onload = () => {
-            const friendCards = document.querySelectorAll('.friend-card');
-            friendCards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animation = 'fadeIn 0.8s forwards'; 
-                }, index * 200); 
-            });
+            document.getElementById("mute-button").textContent = audio.muted ? "🔊 Unmute" : "🔇 Mute";
         };
     </script>
 </body>
