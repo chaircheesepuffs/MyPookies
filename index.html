@@ -5,73 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Pookies</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Futura:wght@400&display=swap');
     body {
       background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
       font-family: 'Futura', sans-serif;
       margin: 0;
       padding: 0;
-      color: #fff;
+      color: #ffffff;
       text-align: center;
-      overflow: hidden;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    /* Splash Screen */
-    #splash {
-      position: fixed;
-      inset: 0;
-      background: #3c3a80;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 9999;
-      user-select: none;
-    }
-    #splash.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-    #splash button {
-      background: #a29ff1;
-      border: none;
-      padding: 18px 40px;
-      font-family: 'Futura', sans-serif;
-      font-size: 1.2rem;
-      color: #3c3a80;
-      text-transform: lowercase;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(162,159,241,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-    #splash button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(162,159,241,0.9);
-    }
-    #splash button:active {
-      transform: translateY(-2px) scale(0.95);
-      box-shadow: 0 8px 20px rgba(162,159,241,0.7);
+      overflow-x: hidden;
     }
 
-    /* Main content container */
+    .enter-screen {
+      position: fixed;
+      inset: 0;
+      background: #000000dd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      cursor: pointer;
+      font-size: 3rem;
+      font-family: 'Futura', sans-serif;
+      color: white;
+      text-transform: lowercase;
+      transition: transform 0.2s ease, text-shadow 0.2s ease;
+      user-select: none;
+    }
+
+    .enter-screen:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+
+    .enter-screen:active {
+      transform: scale(0.95);
+    }
+
     .container {
       width: 100%;
       max-width: 900px;
       padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-    .container.visible {
-      opacity: 1;
-      pointer-events: auto;
+      margin: 40px auto 60px auto;
     }
 
     h1 {
@@ -80,10 +54,8 @@
       letter-spacing: 3px;
       color: #ffffff;
       text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-      margin-bottom: 0;
     }
 
-    /* Friend Cards Grid */
     .friend-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -92,29 +64,15 @@
       margin-top: 30px;
     }
 
-    /* Friend Card Style & Animations */
     .friend-card {
       background: rgba(255, 255, 255, 0.2);
       border-radius: 12px;
       padding: 15px;
-      width: 100%;
       max-width: 260px;
+      width: 100%;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      cursor: default;
-      user-select: none;
-    }
-    .container.visible .friend-card {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: var(--delay, 0s);
-    }
-    .friend-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .friend-header h2 {
@@ -127,245 +85,246 @@
     .friend-body p {
       font-size: 1.1em;
       color: #ffffff;
-      margin-top: 8px;
     }
 
-    /* Audio Controls */
-    #audioControls {
-      margin-top: 40px;
+    .friend-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .player {
+      margin-top: 30px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 20px;
+      font-size: 1.2rem;
       user-select: none;
     }
-    #muteBtn {
-      font-family: 'Futura', sans-serif;
+
+    .song-title {
+      margin-bottom: 10px;
       text-transform: lowercase;
-      background: rgba(162, 159, 241, 0.7);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      color: #3c3a80;
       font-weight: 600;
-      box-shadow: 0 5px 15px rgba(162,159,241,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
-    #muteBtn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(162,159,241,0.9);
-    }
-    #muteBtn:active {
-      transform: translateY(-2px) scale(0.95);
-      box-shadow: 0 8px 20px rgba(162,159,241,0.7);
-    }
-    #volumeSlider {
-      width: 150px;
+
+    .volume-btn {
       cursor: pointer;
-      accent-color: #a29ff1;
-      height: 8px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.3);
-      -webkit-appearance: none;
+      margin-top: 10px;
+      transition: transform 0.2s ease;
+      font-family: 'Futura', sans-serif;
+      font-size: 1.1rem;
+      color: white;
+      text-transform: lowercase;
+      background: none;
+      border: none;
       outline: none;
+      user-select: none;
     }
-    #volumeSlider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #a29ff1;
+
+    .volume-btn:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+    }
+
+    .volume-btn:active {
+      transform: scale(0.95);
+    }
+
+    .progress-container {
+      width: 80%;
+      max-width: 600px;
+      margin-top: 10px;
+    }
+
+    .progress {
+      width: 100%;
       cursor: pointer;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: background 0.3s ease;
     }
-    #volumeSlider::-webkit-slider-thumb:hover {
-      background: #8a87cc;
-    }
-    #volumeSlider::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: #a29ff1;
-      cursor: pointer;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: background 0.3s ease;
-    }
-    #volumeSlider::-moz-range-thumb:hover {
-      background: #8a87cc;
+
+    .time {
+      margin-top: 4px;
+      font-size: 0.9em;
+      font-family: 'Futura', sans-serif;
+      user-select: none;
     }
 
     @media (max-width: 768px) {
       h1 {
         font-size: 2.2em;
       }
+      .enter-screen {
+        font-size: 2.5rem;
+      }
     }
+
     @media (max-width: 480px) {
       .friend-cards {
         grid-template-columns: 1fr;
-      }
-      #audioControls {
-        flex-direction: column;
-        gap: 15px;
       }
     }
   </style>
 </head>
 <body>
-  <div id="splash" role="dialog" aria-modal="true" aria-label="Welcome screen">
-    <button id="enterBtn">click to enter</button>
-  </div>
 
-  <main class="container" aria-hidden="true" role="main">
+  <div class="enter-screen" onclick="startMusic()">click to enter</div>
+
+  <div class="container" id="main-content" style="display:none;">
     <h1>my pookies!!</h1>
     <div class="friend-cards">
-      <div class="friend-card" style="--delay: 0s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>bxt</h2></div>
         <div class="friend-body"><p>bxt pookie!!</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 0.15s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>astral</h2></div>
         <div class="friend-body"><p>astral from aa services gooner</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 0.3s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>laxlep</h2></div>
         <div class="friend-body"><p>laxlep goon on vc on time</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 0.45s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>jjfire</h2></div>
         <div class="friend-body"><p>jjfire is jjfire and no one can change that</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 0.6s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>heeps</h2></div>
         <div class="friend-body"><p>british</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 0.75s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>neva</h2></div>
         <div class="friend-body"><p>pookie neva!!</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 0.9s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>table</h2></div>
         <div class="friend-body"><p>brother</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 1.05s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>z4eu</h2></div>
         <div class="friend-body"><p>z4eu is very cute and adorable and kissable</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 1.2s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>raze</h2></div>
         <div class="friend-body"><p>raze og raze</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 1.35s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>prroxzy</h2></div>
         <div class="friend-body"><p>if you saw this guy you would wanna kiss him aggresively</p></div>
       </div>
-
-      <div class="friend-card" style="--delay: 1.5s;">
+      <div class="friend-card">
         <div class="friend-header"><h2>kingguernesy</h2></div>
         <div class="friend-body"><p>dude start making project krabs updates again PLEASE</p></div>
       </div>
     </div>
 
-    <div id="audioControls">
-      <button id="muteBtn" aria-label="Mute or unmute audio">mute</button>
-      <input
-        id="volumeSlider"
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        aria-label="Volume control slider"
-      />
+    <div class="player">
+      <div class="song-title" id="song-title">Loading...</div>
+      <button class="volume-btn" id="volume-btn">mute</button>
+
+      <div class="progress-container">
+        <input type="range" id="progress" class="progress" value="0" min="0" step="1" />
+        <div class="time" id="time">0:00 / 0:00</div>
+      </div>
     </div>
-  </main>
+  </div>
 
   <script>
-    const splash = document.getElementById('splash');
-    const enterBtn = document.getElementById('enterBtn');
-    const mainContent = document.querySelector('.container');
-    const muteBtn = document.getElementById('muteBtn');
-    const volumeSlider = document.getElementById('volumeSlider');
-
     const songs = [
-      'https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3',
-      'https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3',
-      'https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3',
-      'https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3'
+      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3", name: "ok im cool" },
+      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3", name: "stephanie" },
+      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3", name: "nope your too late i already died" },
+      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3", name: "party" }
     ];
 
-    let audio;
+    const audio = new Audio();
+    audio.volume = 0.7;
+
+    const volumeBtn = document.getElementById("volume-btn");
+    const songTitle = document.getElementById("song-title");
+    const progress = document.getElementById("progress");
+    const timeDisplay = document.getElementById("time");
+    const enterScreen = document.querySelector(".enter-screen");
+    const mainContent = document.getElementById("main-content");
+
     let isMuted = false;
+    let currentSongIndex = -1;
+    let progressUpdateInterval;
 
-    function setupAudio() {
-      if (audio) {
-        audio.pause();
-        audio.remove();
-      }
-      const randomIndex = Math.floor(Math.random() * songs.length);
-      audio = new Audio(songs[randomIndex]);
-      audio.loop = true;
-      audio.volume = 0.4;
-      audio.muted = isMuted;
-      audio.play().catch(() => {
-        /* autoplay might fail without user interaction */
-      });
-
-      volumeSlider.value = audio.volume;
-
-      volumeSlider.oninput = () => {
-        audio.volume = volumeSlider.value;
-        if (audio.volume === 0) {
-          isMuted = true;
-          audio.muted = true;
-          muteBtn.textContent = 'unmute';
-        } else {
-          isMuted = false;
-          audio.muted = false;
-          muteBtn.textContent = 'mute';
-        }
-      };
-
-      muteBtn.onclick = () => {
-        isMuted = !isMuted;
-        audio.muted = isMuted;
-        muteBtn.textContent = isMuted ? 'unmute' : 'mute';
-        if (!isMuted) {
-          volumeSlider.value = audio.volume || 0.4;
-        } else {
-          volumeSlider.value = 0;
-        }
-      };
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
-    function animateFriendCards() {
-      const friendCards = document.querySelectorAll('.friend-card');
-      friendCards.forEach((card, index) => {
-        card.style.setProperty('--delay', `${index * 0.15}s`);
-      });
+    function loadSong(index) {
+      currentSongIndex = index;
+      audio.src = songs[index].url;
+      audio.load();
+      songTitle.textContent = songs[index].name;
+      progress.value = 0;
+      timeDisplay.textContent = `0:00 / 0:00`;
     }
 
-    enterBtn.addEventListener('click', () => {
-      splash.classList.add('hidden');
-      setTimeout(() => {
-        splash.style.display = 'none';
-        mainContent.classList.add('visible');
-        mainContent.setAttribute('aria-hidden', 'false');
-        animateFriendCards();
-      }, 500);
-      setupAudio();
-      document.body.style.overflow = 'auto';
+    function playRandomSong() {
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * songs.length);
+      } while (nextIndex === currentSongIndex);
+      loadSong(nextIndex);
+      audio.play();
+    }
+
+    function updateProgress() {
+      if (!audio.duration) return;
+      progress.max = Math.floor(audio.duration);
+      progress.value = Math.floor(audio.currentTime);
+      timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+
+    function startProgressUpdater() {
+      if (progressUpdateInterval) clearInterval(progressUpdateInterval);
+      progressUpdateInterval = setInterval(updateProgress, 500);
+    }
+
+    function stopProgressUpdater() {
+      if (progressUpdateInterval) clearInterval(progressUpdateInterval);
+    }
+
+    progress.addEventListener("input", () => {
+      audio.currentTime = progress.value;
+      updateProgress();
     });
+
+    volumeBtn.addEventListener("click", () => {
+      if (isMuted) {
+        audio.muted = false;
+        isMuted = false;
+        volumeBtn.textContent = "mute";
+      } else {
+        audio.muted = true;
+        isMuted = true;
+        volumeBtn.textContent = "unmute";
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      playRandomSong();
+    });
+
+    audio.addEventListener("play", () => {
+      startProgressUpdater();
+    });
+
+    audio.addEventListener("pause", () => {
+      stopProgressUpdater();
+    });
+
+    function startMusic() {
+      enterScreen.style.display = "none";
+      mainContent.style.display = "block";
+      playRandomSong();
+    }
   </script>
 </body>
 </html>
