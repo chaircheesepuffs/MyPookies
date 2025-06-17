@@ -1,235 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Pookies</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
-      font-family: 'Futura', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #ffffff;
-      text-align: center;
-      overflow-x: hidden;
-    }
-    .glow-blue {
-      color: #6c63ff;
-      text-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff,
-        0 0 15px #6c63ff,
-        0 0 20px #6c63ff;
-    }
-    .glow-blue-hover:hover {
-      text-shadow:
-        0 0 10px #8f7fff,
-        0 0 20px #8f7fff,
-        0 0 30px #8f7fff,
-        0 0 40px #8f7fff;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Pookies</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Futura&display=swap');
+
+  body {
+    background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
+    font-family: 'Futura', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  .enter-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+    font-size: 3rem;
+    font-family: 'Futura', sans-serif;
+    color: #a29ff1;
+    text-transform: lowercase;
+    user-select: none;
+    transition: transform 0.2s ease, text-shadow 0.3s ease;
+    filter: drop-shadow(0 0 8px #a29ff1);
+  }
+  .enter-screen:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px #a29ff1);
+  }
+  .enter-screen:active {
+    transform: scale(0.95);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    margin: 40px auto 60px auto;
+  }
+
+  h1 {
+    font-size: 2.8em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #a29ff1;
+    user-select: none;
+    filter:
+      drop-shadow(0 0 5px #a29ff1)
+      drop-shadow(0 0 15px #a29ff1)
+      drop-shadow(0 0 30px #a29ff1);
+  }
+
+  .friend-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin-top: 30px;
+  }
+
+  .friend-card {
+    background: rgba(255 255 255 / 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    max-width: 260px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0 0 0 / 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+  }
+  .friend-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0 0 0 / 0.3);
+  }
+
+  .friend-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #a29ff1;
+    filter:
+      drop-shadow(0 0 4px #a29ff1)
+      drop-shadow(0 0 8px #a29ff1);
+  }
+
+  .friend-body p {
+    font-size: 1.1em;
+    color: #a29ff1;
+    filter:
+      drop-shadow(0 0 3px #a29ff1);
+  }
+
+  .player {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+    user-select: none;
+  }
+
+  .song-title {
+    margin-bottom: 10px;
+    text-transform: lowercase;
+    font-weight: 600;
+    color: #a29ff1;
+    filter:
+      drop-shadow(0 0 5px #a29ff1)
+      drop-shadow(0 0 15px #a29ff1);
+  }
+
+  .volume-btn {
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s ease, filter 0.3s ease;
+    font-family: 'Futura', sans-serif;
+    font-size: 1.1rem;
+    color: #a29ff1;
+    text-transform: lowercase;
+    background: none;
+    border: none;
+    outline: none;
+    user-select: none;
+    filter:
+      drop-shadow(0 0 6px #a29ff1);
+  }
+  .volume-btn:hover {
+    transform: scale(1.1);
+    filter:
+      drop-shadow(0 0 12px #a29ff1);
+  }
+  .volume-btn:active {
+    transform: scale(0.95);
+  }
+
+  .progress-container {
+    width: 80%;
+    max-width: 600px;
+    margin-top: 10px;
+  }
+
+  #progress {
+    width: 100%;
+    cursor: pointer;
+    -webkit-appearance: none;
+    background: #8f8af4;
+    height: 8px;
+    border-radius: 4px;
+    filter: drop-shadow(0 0 8px #a29ff1);
+  }
+  #progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #a29ff1;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow:
+      0 0 8px #a29ff1;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  #progress::-webkit-slider-thumb:hover {
+    background: #c0bfff;
+    box-shadow:
+      0 0 15px #c0bfff;
+  }
+  #progress::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #a29ff1;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow:
+      0 0 8px #a29ff1;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  #progress::-moz-range-thumb:hover {
+    background: #c0bfff;
+    box-shadow:
+      0 0 15px #c0bfff;
+  }
+
+  .time {
+    margin-top: 4px;
+    font-size: 0.9em;
+    font-family: 'Futura', sans-serif;
+    color: #a29ff1;
+    user-select: none;
+    filter:
+      drop-shadow(0 0 4px #a29ff1);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.2em;
     }
     .enter-screen {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, #ffffff, #a29ff1, #a29ff1, #ffffff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      cursor: pointer;
-      font-size: 3rem;
-      font-family: 'Futura', sans-serif;
-      color: #6c63ff;
-      text-transform: lowercase;
-      user-select: none;
-      transition: transform 0.2s ease;
+      font-size: 2.5rem;
     }
-    .enter-screen:hover {
-      transform: scale(1.05);
-      text-shadow:
-        0 0 10px #8f7fff,
-        0 0 20px #8f7fff,
-        0 0 30px #8f7fff,
-        0 0 40px #8f7fff;
-    }
-    .enter-screen:active {
-      transform: scale(0.95);
-    }
-    .container {
-      width: 100%;
-      max-width: 900px;
-      padding: 20px;
-      margin: 40px auto 60px auto;
-    }
-    h1 {
-      font-size: 2.8em;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: #6c63ff;
-      user-select: none;
-      text-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff,
-        0 0 15px #6c63ff,
-        0 0 20px #6c63ff;
-    }
+  }
+
+  @media (max-width: 480px) {
     .friend-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-      justify-items: center;
-      margin-top: 30px;
+      grid-template-columns: 1fr;
     }
-    .friend-card {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      padding: 15px;
-      max-width: 260px;
-      width: 100%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #6c63ff;
-      text-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff;
-    }
-    .friend-header h2 {
-      margin: 0;
-      font-size: 1.5em;
-      color: #6c63ff;
-      text-shadow: 0 0 5px #6c63ff;
-      user-select: none;
-    }
-    .friend-body p {
-      font-size: 1.1em;
-      color: #6c63ff;
-      user-select: none;
-    }
-    .friend-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-    .player {
-      margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 1.2rem;
-      user-select: none;
-      color: #6c63ff;
-      text-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff,
-        0 0 15px #6c63ff;
-    }
-    .song-title {
-      margin-bottom: 10px;
-      font-weight: 600;
-      text-transform: lowercase;
-      user-select: none;
-    }
-    .volume-btn {
-      cursor: pointer;
-      margin-top: 10px;
-      transition: transform 0.2s ease;
-      font-family: 'Futura', sans-serif;
-      font-size: 1.1rem;
-      color: #6c63ff;
-      text-transform: lowercase;
-      background: none;
-      border: none;
-      outline: none;
-      user-select: none;
-      text-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff,
-        0 0 15px #6c63ff;
-    }
-    .volume-btn:hover {
-      transform: scale(1.1);
-      text-shadow:
-        0 0 10px #8f7fff,
-        0 0 20px #8f7fff,
-        0 0 30px #8f7fff;
-    }
-    .volume-btn:active {
-      transform: scale(0.95);
-    }
-    .progress-container {
-      width: 80%;
-      max-width: 600px;
-      margin-top: 10px;
-    }
-    #progress {
-      width: 100%;
-      -webkit-appearance: none;
-      height: 8px;
-      border-radius: 5px;
-      background: #a29ff1;
-      cursor: pointer;
-      box-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff;
-      transition: background 0.3s ease;
-    }
-    #progress::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #6c63ff;
-      cursor: pointer;
-      box-shadow:
-        0 0 10px #6c63ff,
-        0 0 20px #6c63ff;
-      transition: background 0.3s ease;
-      margin-top: -6px;
-    }
-    #progress::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #6c63ff;
-      cursor: pointer;
-      box-shadow:
-        0 0 10px #6c63ff,
-        0 0 20px #6c63ff;
-      transition: background 0.3s ease;
-    }
-    .time {
-      margin-top: 4px;
-      font-size: 0.9em;
-      font-family: 'Futura', sans-serif;
-      user-select: none;
-      color: #6c63ff;
-      text-shadow:
-        0 0 5px #6c63ff,
-        0 0 10px #6c63ff;
-    }
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2em;
-      }
-      .enter-screen {
-        font-size: 2.5rem;
-      }
-    }
-    @media (max-width: 480px) {
-      .friend-cards {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <div class="enter-screen glow-blue-glow" onclick="startMusic()">click to enter</div>
+  <div class="enter-screen" onclick="startMusic()">click to enter</div>
 
   <div class="container" id="main-content" style="display:none;">
-    <h1>MY POOKIES!!</h1>
+    <h1>my pookies!!</h1>
     <div class="friend-cards">
       <div class="friend-card">
         <div class="friend-header"><h2>bxt</h2></div>
@@ -282,102 +277,105 @@
       <button class="volume-btn" id="volume-btn">mute</button>
 
       <div class="progress-container">
-        <input type="range" id="progress" value="0" min="0" step="1" />
+        <input type="range" id="progress" min="0" step="1" value="0" />
         <div class="time" id="time">0:00 - 0:00</div>
       </div>
     </div>
   </div>
 
-  <script>
-    const songs = [
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3", name: "ok im cool" },
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3", name: "stephanie" },
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3", name: "nope your too late i already died" },
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3", name: "party" }
-    ];
+<script>
+  const songs = [
+    { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3", name: "ok im cool" },
+    { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3", name: "stephanie" },
+    { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3", name: "nope your too late i already died" },
+    { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3", name: "party" }
+  ];
 
-    const audio = new Audio();
-    audio.volume = 0.7;
+  const audio = new Audio();
+  audio.volume = 0.7;
 
-    const volumeBtn = document.getElementById("volume-btn");
-    const songTitle = document.getElementById("song-title");
-    const progress = document.getElementById("progress");
-    const timeDisplay = document.getElementById("time");
-    const enterScreen = document.querySelector(".enter-screen");
-    const mainContent = document.getElementById("main-content");
+  const volumeBtn = document.getElementById("volume-btn");
+  const songTitle = document.getElementById("song-title");
+  const progress = document.getElementById("progress");
+  const timeDisplay = document.getElementById("time");
+  const enterScreen = document.querySelector(".enter-screen");
+  const mainContent = document.getElementById("main-content");
 
-    let isMuted = false;
-    let currentSongIndex = -1;
-    let isDragging = false;
+  let isMuted = false;
+  let currentSongIndex = -1;
+  let rafId = null;
 
-    function formatTime(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  function loadSong(index) {
+    currentSongIndex = index;
+    audio.src = songs[index].url;
+    audio.load();
+    songTitle.textContent = songs[index].name;
+    progress.value = 0;
+    timeDisplay.textContent = `0:00 - 0:00`;
+  }
+
+  function playRandomSong() {
+    let nextIndex;
+    do {
+      nextIndex = Math.floor(Math.random() * songs.length);
+    } while (nextIndex === currentSongIndex);
+    loadSong(nextIndex);
+    audio.play();
+  }
+
+  function updateProgress() {
+    if (!audio.duration) return;
+    progress.max = Math.floor(audio.duration);
+    progress.value = audio.currentTime;
+    timeDisplay.textContent = `${formatTime(audio.currentTime)} - ${formatTime(audio.duration)}`;
+  }
+
+  function smoothUpdate() {
+    updateProgress();
+    rafId = requestAnimationFrame(smoothUpdate);
+  }
+
+  progress.addEventListener("input", () => {
+    audio.currentTime = progress.value;
+    updateProgress();
+  });
+
+  volumeBtn.addEventListener("click", () => {
+    if (isMuted) {
+      audio.muted = false;
+      isMuted = false;
+      volumeBtn.textContent = "mute";
+    } else {
+      audio.muted = true;
+      isMuted = true;
+      volumeBtn.textContent = "unmute";
     }
+  });
 
-    function loadSong(index) {
-      currentSongIndex = index;
-      audio.src = songs[index].url;
-      audio.load();
-      songTitle.textContent = songs[index].name;
-      progress.value = 0;
-      timeDisplay.textContent = `0:00 - 0:00`;
-    }
+  audio.addEventListener("ended", () => {
+    playRandomSong();
+  });
 
-    function playRandomSong() {
-      let nextIndex;
-      do {
-        nextIndex = Math.floor(Math.random() * songs.length);
-      } while (nextIndex === currentSongIndex);
-      loadSong(nextIndex);
-      audio.play();
-    }
+  audio.addEventListener("play", () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    smoothUpdate();
+  });
 
-    function updateProgress() {
-      if (!audio.duration) return;
-      if (!isDragging) {
-        progress.max = Math.floor(audio.duration);
-        progress.value = Math.floor(audio.currentTime);
-      }
-      timeDisplay.textContent = `${formatTime(audio.currentTime)} - ${formatTime(audio.duration)}`;
-    }
+  audio.addEventListener("pause", () => {
+    if (rafId) cancelAnimationFrame(rafId);
+  });
 
-    progress.addEventListener("input", () => {
-      isDragging = true;
-      timeDisplay.textContent = `${formatTime(progress.value)} - ${formatTime(audio.duration)}`;
-    });
-
-    progress.addEventListener("change", () => {
-      audio.currentTime = progress.value;
-      isDragging = false;
-    });
-
-    volumeBtn.addEventListener("click", () => {
-      if (isMuted) {
-        audio.muted = false;
-        isMuted = false;
-        volumeBtn.textContent = "mute";
-      } else {
-        audio.muted = true;
-        isMuted = true;
-        volumeBtn.textContent = "unmute";
-      }
-    });
-
-    audio.addEventListener("ended", () => {
-      playRandomSong();
-    });
-
-    audio.addEventListener("timeupdate", () => {
-      updateProgress();
-    });
-
-    function startMusic() {
-      enterScreen.style.display = "none";
-      mainContent.style.display = "block";
-      playRandomSong();
-    }
-  </script>
+  function startMusic() {
+    enterScreen.style.display = "none";
+    mainContent.style.display = "block";
+    playRandomSong();
+  }
+</script>
 </body>
 </html>
