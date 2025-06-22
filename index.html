@@ -201,6 +201,27 @@
       text-shadow: 0 0 6px #a29ff1, 0 0 15px #a29ff1;
     }
 
+    .about-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-family: 'Futura', sans-serif;
+      font-size: 1.2rem;
+      color: white;
+      background: #4a5bdc;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #4a5bdc;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      text-transform: none;
+    }
+
+    .about-button:hover {
+      background: #3949ab;
+      box-shadow: 0 0 20px #3949ab;
+    }
+
     @media (max-width: 768px) {
       h1 {
         font-size: 2.2em;
@@ -235,6 +256,7 @@
       <div class="friend-card"><div class="friend-header"><h2>prroxzy</h2></div><div class="friend-body"><p>if you saw this guy you would wanna kiss him aggresively</p></div></div>
       <div class="friend-card"><div class="friend-header"><h2>kingguernesy</h2></div><div class="friend-body"><p>dude start making project krabs updates again PLEASE</p></div></div>
     </div>
+
     <div class="player">
       <div class="song-title" id="song-title">Loading...</div>
       <button class="volume-btn" id="volume-btn">mute</button>
@@ -243,16 +265,18 @@
         <div class="time" id="time">0:00 - 0:00</div>
       </div>
     </div>
+
+    <button class="about-button" onclick="window.location.href='https://chairify.github.io/AboutMe'">Go To About Me</button>
   </div>
 
   <div class="bottom-left-credit" id="watermark">Made By Chair (application.quit)</div>
 
   <script>
     const songs = [
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/ok%20im%20cool.mp3", name: "ok im cool" },
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Stephanie.mp3", name: "stephanie" },
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3", name: "nope your too late i already died" },
-      { url: "https://github.com/chaircheesepuffs/somg/raw/refs/heads/main/party.mp3", name: "party" }
+      { url: "https://github.com/chairify/somg/raw/refs/heads/main/ok%20im%20cool.mp3", name: "ok im cool" },
+      { url: "https://github.com/chairify/somg/raw/refs/heads/main/Stephanie.mp3", name: "stephanie" },
+      { url: "https://github.com/chairify/somg/raw/refs/heads/main/Nope%20your%20too%20late%20i%20already%20died.mp3", name: "nope your too late i already died" },
+      { url: "https://github.com/chairify/somg/raw/refs/heads/main/party.mp3", name: "party" }
     ];
 
     const audio = new Audio();
